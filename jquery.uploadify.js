@@ -1,8 +1,8 @@
 /*
-Uploadify v2.1.0
-Release Date: August 24, 2009
+Uploadify v2.1.1
+Release Date: October 30, 2010
 
-Copyright (c) 2009 Ronnie Garcia, Travis Nickels
+Copyright (c) 2010 Ronnie Garcia, Travis Nickels, Cash Costello
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -46,6 +46,7 @@ if(jQuery)(
 					queueID        : false, // The optional ID of the queue container
 					displayData    : 'percentage', // Set to "speed" to show the upload speed in the default queue item
 					onInit         : function() {}, // Function to run when uploadify is initialized
+					onEmbedFlash   : function() {}, // Function to run after the flash object has been embedded
 					onSelect       : function() {}, // Function to run when a file is selected
 					onQueueFull    : function() {}, // Function to run when the queue reaches capacity
 					onCheck        : function() {}, // Function to run when script checks for duplicate files on the server
@@ -92,7 +93,7 @@ if(jQuery)(
 				if (settings.onInit() !== false) {
 					jQuery(this).css('display','none');
 					jQuery(this).after('<div id="' + jQuery(this).attr('id') + 'Uploader"></div>');
-					swfobject.embedSWF(settings.uploader, settings.id + 'Uploader', settings.width, settings.height, '9.0.24', settings.expressInstall, data, {'quality':'high','wmode':settings.wmode,'allowScriptAccess':settings.scriptAccess});
+					swfobject.embedSWF(settings.uploader, settings.id + 'Uploader', settings.width, settings.height, '9.0.24', settings.expressInstall, data, {'quality':'high','wmode':settings.wmode,'allowScriptAccess':settings.scriptAccess}, {}, settings.onEmbedFlash);
 					if (settings.queueID == false) {
 						jQuery("#" + jQuery(this).attr('id') + "Uploader").after('<div id="' + jQuery(this).attr('id') + 'Queue" class="uploadifyQueue"></div>');
 					}
